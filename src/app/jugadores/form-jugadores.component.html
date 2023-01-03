@@ -1,0 +1,50 @@
+<div class="container">
+
+    <div class="card-body">
+        <form>
+            <div class="form-group row">
+                <label for="nombre" class="col-form-label col-sm-1">Nombre</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="nombre" [(ngModel)]="jugador.nombre">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="nombre" class="col-form-label col-sm-1">Apellido</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="apellido" [(ngModel)]="jugador.apellido">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="nombre" class="col-form-label col-sm-1">Edad</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="edad" [(ngModel)]="jugador.edad">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="nombre" class="col-form-label col-sm-1">Equipo</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="equipo" [(ngModel)]="jugador.equipo">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="nombre" class="col-form-label col-sm-1">Posicion</label>
+                <div class="col-sm-3">
+                    <div class="form-check" *ngFor="let p  of posicion">
+                        <input class="form-check-input" type="checkbox" [checked]="p.select" [value]="p.name" (change)="changedPosicion($event)">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{p.name}}
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <button class="btn btn-success" role="button" (click)='crearJugador()' *ngIf="!jugador.id else elseBlock">
+                Registrar </button>
+            <ng-template #elseBlock>
+                <button class="btn btn-success" role="button" (click)='modificar()'>Modificar</button>
+            </ng-template>
+        </form>
+    </div>
+
+</div>
