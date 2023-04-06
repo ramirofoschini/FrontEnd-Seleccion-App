@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class JugadorService {
 
   private url: string = "http://localhost:8081/jugadores";

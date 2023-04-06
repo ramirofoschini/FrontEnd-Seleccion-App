@@ -44,7 +44,7 @@ export class FormJugadoresComponent implements OnInit {
 
   titulo: String = "Registro de Jugador";
 
-
+  // Inyectar el servicio de jugador
   constructor(private jugadorService: JugadorService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -56,11 +56,13 @@ export class FormJugadoresComponent implements OnInit {
 
     });
   }
+  // Cargar el jugador a modificar
   cargar(): void {
     this.activatedRoute.params.subscribe(
       jug => {
         let id = jug['id'];
         if (id) {
+          
           this.jugadorService.get(id).subscribe(
 
             ju => {
@@ -96,23 +98,5 @@ export class FormJugadoresComponent implements OnInit {
       res => this.router.navigate(['/jugadores'])
     );
   }
-  // modificar(): void {
-  //   // Eliminar todas las posiciones del objeto jugador
-  //   this.jugador.posicion = [];
-
-  //   // Agregar las posiciones seleccionadas al objeto jugador
-  //   for (let i = 0; i < this.posicion.length; i++) {
-  //     if (this.posicion[i].select) {
-  //       this.jugador.posicion.push(this.posicion[i].name);
-  //     }
-  //   }
-
-  //   // Enviar el objeto jugador al backend
-  //   this.jugadorService.modificar(this.jugador).subscribe(
-  //     res => this.router.navigate(['/jugadores'])
-  //   );
-  // }
-
-
 
 }
