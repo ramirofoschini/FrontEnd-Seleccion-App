@@ -50,14 +50,23 @@ export class FormJugadoresComponent implements OnInit {
   ngOnInit(): void {
     this.cargar();
   }
+  setPosicionesSeleccionadas() {
+    this.posicion.forEach(pos => {
+      pos.select = this.jugador.posicion.includes(pos.name.toUpperCase());
 
+    });
+  }
   cargar(): void {
     this.activatedRoute.params.subscribe(
       jug => {
         let id = jug['id'];
         if (id) {
           this.jugadorService.get(id).subscribe(
-            ju => this.jugador = ju
+
+            ju => {
+              this.jugador = ju;
+              this.setPosicionesSeleccionadas();
+            }
           );
         }
       }
@@ -67,7 +76,7 @@ export class FormJugadoresComponent implements OnInit {
 
   crearJugador(): void {
     // Agregar las posiciones seleccionadas al array de posicion del objeto jugador
-    
+
     for (let i = 0; i < this.posicion.length; i++) {
       if (this.posicion[i].select) {
         this.jugador.posicion.push(this.posicion[i].name);
@@ -87,5 +96,23 @@ export class FormJugadoresComponent implements OnInit {
       res => this.router.navigate(['/jugadores'])
     );
   }
+  // modificar(): void {
+  //   // Eliminar todas las posiciones del objeto jugador
+  //   this.jugador.posicion = [];
+
+  //   // Agregar las posiciones seleccionadas al objeto jugador
+  //   for (let i = 0; i < this.posicion.length; i++) {
+  //     if (this.posicion[i].select) {
+  //       this.jugador.posicion.push(this.posicion[i].name);
+  //     }
+  //   }
+
+  //   // Enviar el objeto jugador al backend
+  //   this.jugadorService.modificar(this.jugador).subscribe(
+  //     res => this.router.navigate(['/jugadores'])
+  //   );
+  // }
+
+
 
 }
