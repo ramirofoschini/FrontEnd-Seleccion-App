@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class JugadorService {
 
-  private url: string = "http://localhost:8080/jugadores";
+  private url: string = "http://localhost:8081/jugadores";
 
   constructor(private http: HttpClient) { }
 

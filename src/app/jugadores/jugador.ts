@@ -5,7 +5,9 @@ export class Jugador {
     apellido: string;
     edad: number;
     equipo: string;
-    posicion: string [];
-    
+    posicion: string[];
 
+    constructor() {
+        this.posicion = [];
+    }
 }

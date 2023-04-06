@@ -9,7 +9,7 @@ import { JugadorService } from "./jugador.service";
 })
 export class JugadoresComponent implements OnInit {
 
-    jugadores: Jugador[];
+    jugadores:Jugador[];
     
 
 

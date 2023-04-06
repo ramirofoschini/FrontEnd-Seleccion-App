@@ -10,21 +10,36 @@ import { JugadorService } from './jugador.service';
 })
 export class FormJugadoresComponent implements OnInit {
 
-  posicion = [
-    { id: 1, select: false, name: "Arquero" },
-    { id: 2, select: false, name: "Defensor" },
-    { id: 3, select: false, name: "Volante" },
-    { id: 4, select: true, name: "Delantero" }
+
+
+  jugador: Jugador = new Jugador();
+
+  posicion: Array<any> = [
+    { id: 1, select: false, name: "ARQUERO" },
+    { id: 2, select: false, name: "DEFENSOR" },
+    { id: 3, select: false, name: "MEDIOCAMPISTA" },
+    { id: 4, select: false, name: "DELANTERO" }
   ]
+
 
   changedPosicion($event) {
     const name = $event.target.value;
-    const isCheked = $event.target.checked;
-    
-    console.log(name, isCheked)
-  }
+    const isChecked = $event.target.checked;
 
-  jugador: Jugador = new Jugador();
+    if (isChecked) {
+      // Agregar la posición al arreglo de posiciones del jugador
+      this.jugador.posicion.push(name);
+    } else {
+      // Remover la posición del arreglo de posiciones del jugador
+      const index = this.jugador.posicion.indexOf(name);
+      if (index !== -1) {
+        this.jugador.posicion.splice(index, 1);
+      }
+    }
+
+    console.log(this.jugador.posicion);
+
+  }
 
 
   titulo: String = "Registro de Jugador";
@@ -50,15 +65,23 @@ export class FormJugadoresComponent implements OnInit {
 
   }
 
-
   crearJugador(): void {
-    console.log(this.jugador);
+    // Agregar las posiciones seleccionadas al array de posicion del objeto jugador
+    
+    for (let i = 0; i < this.posicion.length; i++) {
+      if (this.posicion[i].select) {
+        this.jugador.posicion.push(this.posicion[i].name);
+      }
+    }
+
+    // Enviar el objeto jugador al backend
+
     this.jugadorService.crearJugador(this.jugador).subscribe(
       res => this.router.navigate(['/jugadores'])
-
     );
-
+    console.log(this.jugador);
   }
+
   modificar(): void {
     this.jugadorService.modificar(this.jugador).subscribe(
       res => this.router.navigate(['/jugadores'])

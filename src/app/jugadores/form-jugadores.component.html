@@ -29,10 +29,10 @@
             <div class="form-group row">
                 <label for="nombre" class="col-form-label col-sm-1">Posicion</label>
                 <div class="col-sm-3">
-                    <div class="form-check" *ngFor="let p  of posicion">
-                        <input class="form-check-input" type="checkbox" [checked]="p.select" [value]="p.name" (change)="changedPosicion($event)">
+                    <div class="form-check" *ngFor="let pos  of posicion">
+                        <input class="form-check-input" type="checkbox" [checked]="pos.select" [value]="pos.name" (change)="changedPosicion($event)">
                         <label class="form-check-label" for="flexCheckDefault">
-                            {{p.name}}
+                            {{pos.name}}
                         </label>
                     </div>
 
